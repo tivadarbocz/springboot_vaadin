@@ -6,24 +6,18 @@ import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
+import hu.tb.util.PropertyContainer;
 import hu.tb.view.ChartView;
 import hu.tb.view.DefaultView;
 import hu.tb.view.TableView;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 
 /**
  * Created by Tivadar Bocz on 2016.11.03..
  */
 public class TopMenuBar {
 
-    @Autowired
-    Environment env;
-    @Value("${server.context-path}")
-    private String contextPath;
-
     private  UI ui;
+
     public Component getMenubar(UI ui){
         this.ui = ui;
         MenuBar menuBar = new MenuBar();
@@ -66,7 +60,9 @@ public class TopMenuBar {
                     ui.getNavigator().navigateTo(ChartView.VIEW_NAME);
                     break;
                 case Constant.LOGOUT_VIEW:
-
+                    ui.getSession().close();
+                    // Redirect to avoid keeping the removed UI open in the browser
+                    ui.getPage().setLocation(PropertyContainer.getServerContextPath().concat( "/logout"));
                     break;
                 default:
                     Notification notification = new Notification("Menu item is not implemented yet",Notification.Type.TRAY_NOTIFICATION);
