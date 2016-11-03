@@ -61,11 +61,23 @@
 			<artifactId>highchartsapi</artifactId>
 			<version>2.2.1-QF</version>
 		</dependency>
-		<!-- Charts -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-velocity</artifactId>
+		</dependency>
+
+			<!-- Charts -->
 		<dependency>
 			<groupId>com.byteowls</groupId>
 			<artifactId>vaadin-chartjs</artifactId>
 			<version>0.3.0</version>
+		</dependency>
+
+		<!-- security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 	</dependencies>
 
