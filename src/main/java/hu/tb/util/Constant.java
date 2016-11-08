@@ -1,4 +1,4 @@
-package hu.tb.components;
+package hu.tb.util;
 
 /**
  * Created by Tivadar Bocz on 2016.11.03..

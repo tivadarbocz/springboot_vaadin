@@ -2,6 +2,7 @@ package hu.tb;
 
 import hu.tb.customer.Customer;
 import hu.tb.customer.CustomerRepository;
+import hu.tb.i18n.annotation.EnableI18N;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
+@EnableI18N
 public class SpringbootVaadinApplication {
 	private static final Logger log = LoggerFactory.getLogger(SpringbootVaadinApplication.class);
 
