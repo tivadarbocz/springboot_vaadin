@@ -9,4 +9,5 @@ public class Constant {
     public static final String CHART_VIEW = "menu.item.chart.view";
     public static final String LOGOUT_VIEW = "menu.item.logout";
     public static final String QUESTION_VIEW = "menu.item.question.view";
+    public static final String LOCALIZATION_VIEW = "menu.item.localization.view";
 }

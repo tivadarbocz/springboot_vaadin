@@ -12,6 +12,7 @@ import hu.tb.util.I18NText;
 import hu.tb.util.PropertyContainer;
 import hu.tb.view.ChartView;
 import hu.tb.view.DefaultView;
+import hu.tb.view.LocalizationView;
 import hu.tb.view.TableView;
 
 import java.sql.Date;
@@ -52,6 +53,7 @@ public class TopMenuBar {
         charts.addItem("Scatter line chart",FontAwesome.LOCK,handleMenuBarItemClick);
         //Question
         menuBar.addItem(I18NText.I18NText(Constant.QUESTION_VIEW, ui.getLocale(), i18n), FontAwesome.QUESTION_CIRCLE, handleMenuBarItemClick);
+        menuBar.addItem(I18NText.I18NText(Constant.LOCALIZATION_VIEW, ui.getLocale(), i18n), FontAwesome.FLAG, handleMenuBarItemClick);
         //Sign out
         menuBar.addItem(I18NText.I18NText(Constant.LOGOUT_VIEW, ui.getLocale(), i18n), FontAwesome.SIGN_OUT, handleMenuBarItemClick);
         menuBar.addItem(getFormattedLastTimeStamp(), FontAwesome.CLOCK_O, null);
@@ -71,6 +73,8 @@ public class TopMenuBar {
                 ui.getNavigator().navigateTo(TableView.VIEW_NAME);
             } else if (menuItem.getText().equals(I18NText.I18NText(Constant.CHART_VIEW, ui.getLocale(), i18n))) {
                 ui.getNavigator().navigateTo(ChartView.VIEW_NAME);
+            } else if (menuItem.getText().equals(I18NText.I18NText(Constant.LOCALIZATION_VIEW, ui.getLocale(), i18n))) {
+                ui.getNavigator().navigateTo(LocalizationView.VIEW_NAME);
             } else if (menuItem.getText().equals(I18NText.I18NText(Constant.LOGOUT_VIEW, ui.getLocale(), i18n))) {
                 ui.getSession().close();
                 // Redirect to avoid keeping the removed UI open in the browser
