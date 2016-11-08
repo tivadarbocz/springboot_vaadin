@@ -92,6 +92,11 @@
 			<artifactId>spring-vaadin-i18n</artifactId>
 			<version>0.0.5.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.10</version>
+		</dependency>
 
 	</dependencies>
 
