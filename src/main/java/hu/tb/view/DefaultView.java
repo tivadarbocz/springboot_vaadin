@@ -34,7 +34,6 @@ public class DefaultView extends ResponsiveLayout implements View {
 // Here we are creating a new responsiveLayout to house the multiple rows
         // for the main content
 
-
         // simple row with one column that takes 3/12 spaces
         // and then the row centers that column to the middle
         ResponsiveRow titleRow = new ResponsiveRow();

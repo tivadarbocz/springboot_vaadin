@@ -91,6 +91,9 @@ public class ResponsiveComponents {
         chartButton.addClickListener(menuElementsonClickListener(Constant.CHART_VIEW, ui));
         ResponsiveColumn chartColumn = new ResponsiveColumn(12, 3, 12, 12);
         chartColumn.setComponent(chartButton);
+        // We can also set the visibility depending on what screen they are on
+        // this hids the menu buttons when on mobile
+        // chartColumn.setVisibility(ResponsiveLayout.DisplaySize.XS, false);
 
         /**
          * Menubar Logout button
@@ -102,10 +105,7 @@ public class ResponsiveComponents {
         ResponsiveColumn logoutColumn = new ResponsiveColumn(12, 3, 12, 12);
         logoutColumn.setComponent(logoutButton);
 
-        // We can also set the visibility depending on what screen they are on
-        // this hids the menu buttons when on mobile
 
-        chartColumn.setVisibility(ResponsiveLayout.DisplaySize.XS, false);
 
         menuBar.addColumn(profileColumn);
         menuBar.addColumn(homeColumn);

@@ -104,7 +104,6 @@ public class VaadinUI extends UI {
 
         Navigator navigator = new Navigator(this, viewContainer);
         navigator.addProvider(viewProvider);
-        //mainContentCol.setComponent(responsiveComponents.getDummyMainContentResponsiveLayout());
         mainContentCol.setComponent(viewContainer);
     }
 
