@@ -12,6 +12,7 @@ import hu.tb.util.Constant;
 import hu.tb.util.PropertyContainer;
 import hu.tb.view.ChartView;
 import hu.tb.view.DefaultView;
+import hu.tb.view.DictionaryTestView;
 import hu.tb.view.TableView;
 
 import java.io.File;
@@ -95,6 +96,17 @@ public class ResponsiveComponents {
         // this hids the menu buttons when on mobile
         // chartColumn.setVisibility(ResponsiveLayout.DisplaySize.XS, false);
 
+
+        /**
+         * Menubar dictionary test button
+         */
+        Button dictionaryTestButton = new Button("", FontAwesome.TASKS);
+        dictionaryTestButton.addStyleName(ValoTheme.BUTTON_HUGE);
+        dictionaryTestButton.setSizeFull();
+        dictionaryTestButton.addClickListener(menuElementsonClickListener(Constant.DICTIONARY_TEST_VIEW, ui));
+        ResponsiveColumn dictionaryTestColumn = new ResponsiveColumn(12, 3, 12, 12);
+        dictionaryTestColumn.setComponent(dictionaryTestButton);
+
         /**
          * Menubar Logout button
          */
@@ -105,12 +117,11 @@ public class ResponsiveComponents {
         ResponsiveColumn logoutColumn = new ResponsiveColumn(12, 3, 12, 12);
         logoutColumn.setComponent(logoutButton);
 
-
-
         menuBar.addColumn(profileColumn);
         menuBar.addColumn(homeColumn);
         menuBar.addColumn(tableColumn);
         menuBar.addColumn(chartColumn);
+        menuBar.addColumn(dictionaryTestColumn);
         menuBar.addColumn(logoutColumn);
 
         return menuBar;
@@ -192,6 +203,9 @@ public class ResponsiveComponents {
                     break;
                 case Constant.CHART_VIEW:
                     ui.getNavigator().navigateTo(ChartView.VIEW_NAME);
+                    break;
+                case Constant.DICTIONARY_TEST_VIEW:
+                    ui.getNavigator().navigateTo(DictionaryTestView.VIEW_NAME);
                     break;
                 case Constant.LOGOUT_VIEW:
                     ui.getSession().close();
