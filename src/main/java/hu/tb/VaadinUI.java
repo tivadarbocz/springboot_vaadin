@@ -4,6 +4,7 @@ import com.jarektoro.responsivelayout.ResponsiveColumn;
 import com.jarektoro.responsivelayout.ResponsiveLayout;
 import com.jarektoro.responsivelayout.ResponsiveRow;
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Viewport;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
@@ -21,6 +22,7 @@ import java.util.Locale;
  */
 @SpringUI()
 @Theme("valo")
+@Viewport(value = "width=device-width, initial-scale=1.0")
 public class VaadinUI extends UI {
 
     // We can use either constructor autowiring or field autowiring
