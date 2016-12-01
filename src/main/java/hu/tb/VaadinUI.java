@@ -29,13 +29,11 @@ public class VaadinUI extends UI {
     @Autowired
     private I18N i18n;
     private final TranslatableSupport translatableSupport = new TranslatableSupport(this);
-    private static UI ui;
 
     @Override
     protected void init(VaadinRequest request) {
         setLocale(Locale.ENGLISH);
         buildResponsiveLayout();
-        ui = getUI();
     }
 
     /**
@@ -67,10 +65,6 @@ public class VaadinUI extends UI {
         getTranslatableSupport().updateMessageStrings(getLocale());
     }
 
-    public static UI getUIStatic() {
-        return ui;
-    }
-
     private void buildResponsiveLayout() {
         ResponsiveComponents responsiveComponents = new ResponsiveComponents();
          /*Responsive menu*/
@@ -99,7 +93,7 @@ public class VaadinUI extends UI {
         /**
          * Set the menubar to first column
          */
-        sideMenuCol.setComponent(responsiveComponents.getMenuBar());
+        sideMenuCol.setComponent(responsiveComponents.getMenuBar(getUI()));
         /**
          * Set the layout to second (main content) column
          */

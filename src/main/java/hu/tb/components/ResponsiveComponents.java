@@ -8,7 +8,6 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Sizeable;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
-import hu.tb.VaadinUI;
 import hu.tb.util.Constant;
 import hu.tb.util.PropertyContainer;
 import hu.tb.view.ChartView;
@@ -29,7 +28,7 @@ public class ResponsiveComponents {
 
     }
 
-    public ResponsiveRow getMenuBar() {
+    public ResponsiveRow getMenuBar(UI ui) {
         // The menu itself is just a Row
         // Oh did i mention that rows and columns are nestable - Rad
 
@@ -70,7 +69,7 @@ public class ResponsiveComponents {
         Button homeButton = new Button("", FontAwesome.HOME);
         homeButton.addStyleName(ValoTheme.BUTTON_HUGE);
         homeButton.setSizeFull();
-        homeButton.addClickListener(menuElementsonClickListener(Constant.START_VIEW));
+        homeButton.addClickListener(menuElementsonClickListener(Constant.START_VIEW, ui));
         homeColumn.setComponent(homeButton);
 
         /**
@@ -79,7 +78,7 @@ public class ResponsiveComponents {
         Button tableButton = new Button("", FontAwesome.TABLE);
         tableButton.addStyleName(ValoTheme.BUTTON_HUGE);
         tableButton.setSizeFull();
-        tableButton.addClickListener(menuElementsonClickListener(Constant.TABLE_VIEW));
+        tableButton.addClickListener(menuElementsonClickListener(Constant.TABLE_VIEW, ui));
         ResponsiveColumn tableColumn = new ResponsiveColumn(12, 3, 12, 12);
         tableColumn.setComponent(tableButton);
 
@@ -89,7 +88,7 @@ public class ResponsiveComponents {
         Button chartButton = new Button("", FontAwesome.BAR_CHART_O);
         chartButton.addStyleName(ValoTheme.BUTTON_HUGE);
         chartButton.setSizeFull();
-        chartButton.addClickListener(menuElementsonClickListener(Constant.CHART_VIEW));
+        chartButton.addClickListener(menuElementsonClickListener(Constant.CHART_VIEW, ui));
         ResponsiveColumn chartColumn = new ResponsiveColumn(12, 3, 12, 12);
         chartColumn.setComponent(chartButton);
 
@@ -99,7 +98,7 @@ public class ResponsiveComponents {
         Button logoutButton = new Button("", FontAwesome.POWER_OFF);
         logoutButton.addStyleName(ValoTheme.BUTTON_HUGE);
         logoutButton.setSizeFull();
-        logoutButton.addClickListener(menuElementsonClickListener(Constant.LOGOUT_VIEW));
+        logoutButton.addClickListener(menuElementsonClickListener(Constant.LOGOUT_VIEW, ui));
         ResponsiveColumn logoutColumn = new ResponsiveColumn(12, 3, 12, 12);
         logoutColumn.setComponent(logoutButton);
 
@@ -181,23 +180,23 @@ public class ResponsiveComponents {
         return responsiveLayout;
     }
 
-    private Button.ClickListener menuElementsonClickListener(String name) {
+    private Button.ClickListener menuElementsonClickListener(String name, UI ui) {
 
         return e -> {
             switch (name) {
                 case Constant.START_VIEW:
-                    VaadinUI.getUIStatic().getNavigator().navigateTo(DefaultView.VIEW_NAME);
+                    ui.getNavigator().navigateTo(DefaultView.VIEW_NAME);
                     break;
                 case Constant.TABLE_VIEW:
-                    VaadinUI.getUIStatic().getNavigator().navigateTo(TableView.VIEW_NAME);
+                    ui.getNavigator().navigateTo(TableView.VIEW_NAME);
                     break;
                 case Constant.CHART_VIEW:
-                    VaadinUI.getUIStatic().getNavigator().navigateTo(ChartView.VIEW_NAME);
+                    ui.getNavigator().navigateTo(ChartView.VIEW_NAME);
                     break;
                 case Constant.LOGOUT_VIEW:
-                    VaadinUI.getUIStatic().getSession().close();
+                    ui.getSession().close();
                     // Redirect to avoid keeping the removed UI open in the browser
-                    VaadinUI.getUIStatic().getPage().setLocation(PropertyContainer.getServerContextPath().concat("/logout"));
+                    ui.getPage().setLocation(PropertyContainer.getServerContextPath().concat("/logout"));
                     break;
                 default:
                     Notification notification = new Notification("Menu item is not implemented yet", Notification.Type.TRAY_NOTIFICATION);
