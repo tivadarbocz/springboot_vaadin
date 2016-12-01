@@ -1,14 +1,15 @@
 package hu.tb;
 
+import com.jarektoro.responsivelayout.ResponsiveColumn;
+import com.jarektoro.responsivelayout.ResponsiveLayout;
+import com.jarektoro.responsivelayout.ResponsiveRow;
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.navigator.SpringViewProvider;
-import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
-import hu.tb.components.TopMenuBar;
+import hu.tb.components.ResponsiveComponents;
 import hu.tb.i18n.I18N;
 import hu.tb.i18n.support.TranslatableSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,27 +29,13 @@ public class VaadinUI extends UI {
     @Autowired
     private I18N i18n;
     private final TranslatableSupport translatableSupport = new TranslatableSupport(this);
+    private static UI ui;
 
     @Override
     protected void init(VaadinRequest request) {
         setLocale(Locale.ENGLISH);
-        final VerticalLayout root = new VerticalLayout();
-        root.setSizeFull();
-        //root.setMargin(true);
-        //root.setSpacing(true);
-        setContent(root);
-
-        TopMenuBar topMenuBar = new TopMenuBar(i18n);
-        topMenuBar.setLastTimeStamp(getSession().getLastRequestTimestamp());
-        root.addComponent(topMenuBar.getMenubar(getUI()));
-
-        final Panel viewContainer = new Panel();
-        viewContainer.setSizeFull();
-        root.addComponent(viewContainer);
-        root.setExpandRatio(viewContainer, 1.0f);
-
-        Navigator navigator = new Navigator(this, viewContainer);
-        navigator.addProvider(viewProvider);
+        buildResponsiveLayout();
+        ui = getUI();
     }
 
     /**
@@ -80,5 +67,51 @@ public class VaadinUI extends UI {
         getTranslatableSupport().updateMessageStrings(getLocale());
     }
 
+    public static UI getUIStatic() {
+        return ui;
+    }
+
+    private void buildResponsiveLayout() {
+        ResponsiveComponents responsiveComponents = new ResponsiveComponents();
+         /*Responsive menu*/
+        setSizeFull(); // set the size of the UI to fill the screen
+        ResponsiveLayout responsiveLayout = responsiveComponents.getRootLayout();
+        setContent(responsiveLayout);
+
+        // ResponsiveLayouts have rows
+        // Our first row will contain our 2 Columns
+        // The Menu Column & the Main Column
+        ResponsiveRow rootRow = responsiveLayout.addRow();
+        rootRow.setHeight("100%");
+        /*------------------------------------------------------*/
+        //This is a convienece constructor
+        //First Param is the size for DisplaySize.XS
+        //Second Param is the size for DisplaySize.SM
+        //Third Param is the size for DisplaySize.MD
+        //Fourth Param is the size for DisplaySize.LG
+
+        ResponsiveColumn sideMenuCol = new ResponsiveColumn(12, 12, 2, 2);
+        rootRow.addColumn(sideMenuCol);
+        // Fluent API
+        ResponsiveColumn mainContentCol = rootRow.addColumn().withDisplayRules(12, 12, 10, 10);
+
+
+        /**
+         * Set the menubar to first column
+         */
+        sideMenuCol.setComponent(responsiveComponents.getMenuBar());
+        /**
+         * Set the layout to second (main content) column
+         */
+        final ResponsiveLayout viewContainer = new ResponsiveLayout();
+        viewContainer.setSizeFull();
+        responsiveLayout.addComponent(viewContainer);
+        //root.setExpandRatio(viewContainer, 1.0f);
+
+        Navigator navigator = new Navigator(this, viewContainer);
+        navigator.addProvider(viewProvider);
+        //mainContentCol.setComponent(responsiveComponents.getDummyMainContentResponsiveLayout());
+        mainContentCol.setComponent(viewContainer);
+    }
 
 }

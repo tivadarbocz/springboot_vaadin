@@ -68,8 +68,8 @@ public class ChartView extends VerticalLayout implements View {
         List<String> labels = config.data().getLabels();
         for (Dataset<?, ?> ds : config.data().getDatasets()) {
             List<Double> data = new ArrayList<>();
-            for (int i = 0; i < labels.size(); i++) {
-                data.add((double) (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100));
+            for (int i = 0; i  < labels.size(); i++) {
+                data.add((Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100));
             }
 
             if (ds instanceof BarDataset) {

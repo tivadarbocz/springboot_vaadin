@@ -1,15 +1,15 @@
 package hu.tb.customer;
 
-import com.vaadin.server.Page;
-import com.vaadin.ui.*;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Page;
+import com.vaadin.shared.Position;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
+import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by Tivadar Bocz on 2016.11.02..
@@ -105,6 +105,7 @@ public class CustomerEditor extends VerticalLayout {
         Notification notification = new Notification("Sikeres mentés!",Notification.Type.TRAY_NOTIFICATION);
         notification.setStyleName(ValoTheme.BUTTON_ICON_ALIGN_RIGHT);
         notification.setIcon(FontAwesome.INFO);
+        notification.setPosition(Position.TOP_RIGHT);
         notification.show(Page.getCurrent());
     }
 
@@ -113,6 +114,7 @@ public class CustomerEditor extends VerticalLayout {
         Notification notification = new Notification("Sikeres törlés!",Notification.Type.TRAY_NOTIFICATION);
         notification.setStyleName(ValoTheme.TEXTFIELD_ALIGN_RIGHT);
         notification.setIcon(FontAwesome.WARNING);
+        notification.setPosition(Position.TOP_RIGHT);
         notification.show(Page.getCurrent());
     }
 

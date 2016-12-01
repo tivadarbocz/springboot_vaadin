@@ -10,4 +10,6 @@ public class Constant {
     public static final String LOGOUT_VIEW = "menu.item.logout";
     public static final String QUESTION_VIEW = "menu.item.question.view";
     public static final String LOCALIZATION_VIEW = "menu.item.localization.view";
+    public static final String TUTORIAL_VIEW = "menu.item.tutorial.view";
+
 }

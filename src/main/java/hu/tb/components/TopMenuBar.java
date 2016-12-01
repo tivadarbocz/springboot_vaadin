@@ -10,10 +10,7 @@ import hu.tb.i18n.I18N;
 import hu.tb.util.Constant;
 import hu.tb.util.I18NText;
 import hu.tb.util.PropertyContainer;
-import hu.tb.view.ChartView;
-import hu.tb.view.DefaultView;
-import hu.tb.view.LocalizationView;
-import hu.tb.view.TableView;
+import hu.tb.view.*;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -21,6 +18,7 @@ import java.text.SimpleDateFormat;
 /**
  * Created by Tivadar Bocz on 2016.11.03..
  */
+@Deprecated
 public class TopMenuBar {
 
     private  UI ui;
@@ -53,7 +51,10 @@ public class TopMenuBar {
         charts.addItem("Scatter line chart",FontAwesome.LOCK,handleMenuBarItemClick);
         //Question
         menuBar.addItem(I18NText.I18NText(Constant.QUESTION_VIEW, ui.getLocale(), i18n), FontAwesome.QUESTION_CIRCLE, handleMenuBarItemClick);
+        //Localization view
         menuBar.addItem(I18NText.I18NText(Constant.LOCALIZATION_VIEW, ui.getLocale(), i18n), FontAwesome.FLAG, handleMenuBarItemClick);
+        //Localization view
+        menuBar.addItem(I18NText.I18NText(Constant.TUTORIAL_VIEW, ui.getLocale(), i18n), FontAwesome.FLASK, handleMenuBarItemClick);
         //Sign out
         menuBar.addItem(I18NText.I18NText(Constant.LOGOUT_VIEW, ui.getLocale(), i18n), FontAwesome.SIGN_OUT, handleMenuBarItemClick);
         menuBar.addItem(getFormattedLastTimeStamp(), FontAwesome.CLOCK_O, null);
@@ -75,6 +76,8 @@ public class TopMenuBar {
                 ui.getNavigator().navigateTo(ChartView.VIEW_NAME);
             } else if (menuItem.getText().equals(I18NText.I18NText(Constant.LOCALIZATION_VIEW, ui.getLocale(), i18n))) {
                 ui.getNavigator().navigateTo(LocalizationView.VIEW_NAME);
+            } else if (menuItem.getText().equals(I18NText.I18NText(Constant.TUTORIAL_VIEW, ui.getLocale(), i18n))) {
+                ui.getNavigator().navigateTo(TutorialView.VIEW_NAME);
             } else if (menuItem.getText().equals(I18NText.I18NText(Constant.LOGOUT_VIEW, ui.getLocale(), i18n))) {
                 ui.getSession().close();
                 // Redirect to avoid keeping the removed UI open in the browser
